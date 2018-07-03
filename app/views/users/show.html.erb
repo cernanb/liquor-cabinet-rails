@@ -1,9 +1,25 @@
 <h1><%= @user.name %>'s  Cabinet</h1>
 
+<% @user.drinks.each do |drink| %>
+  <p><%= drink.name %></p>
+<% end %>
+
+<% if @user.drinks.empty? %>
+  <h4>You have no drinks!</h4>
+<% end %>
+
 
 <h3>Add a drink to your cabinet </h3>
 <%= form_for @drink do |f|  %>
   <%= f.label :name %>
   <%= f.text_field :name  %>
   <%= f.submit %>
+<% end %>
+
+
+<h3> Add an existing drink to your cabinet </h3>
+<%= form_for @user do |f| %>
+  <%= f.collection_check_boxes :drink_ids, Drink.all, :id, :name  %>
+  <%= f.submit %>
+  
 <% end %>

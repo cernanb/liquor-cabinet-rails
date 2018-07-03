@@ -24,9 +24,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+
+    @user = User.find(params[:id])
+    binding.pry
+    if @user.update(user_params)
+      redirect_to @user
+    end
+  end
+
   private
     def user_params
-      params.require(:user).permit(:name, :password)
+      params.require(:user).permit(:name, :password, :drink_ids)
     end
 
 end
