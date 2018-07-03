@@ -1,0 +1,9 @@
+<h1><%= @user.name %>'s  Cabinet</h1>
+
+
+<h3>Add a drink to your cabinet </h3>
+<%= form_for @drink do |f|  %>
+  <%= f.label :name %>
+  <%= f.text_field :name  %>
+  <%= f.submit %>
+<% end %>
