@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @drink = Drink.new
   end
 
   def new
@@ -14,12 +15,18 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    session[:user_id] = @user.id
 
+    if @user.save
+      redirect_to @user
+    else
+      render 'new'
+    end
   end
 
   private
     def user_params
-      params.require(:user).permit(:name)
+      params.require(:user).permit(:name, :password)
     end
 
 end
